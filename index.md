@@ -42,7 +42,7 @@ Each sensor data object contains at a minimum, the following fields:
 * `data_structure_type` - a numeric enumeration identifying the kind of sensor data.
 
 ### Combined air quality and temperature / humidity sensor data
-For AirLink combined air quality and temperature / humidity data, the data structure type is currently `5`.
+For AirLink combined air quality and temperature / humidity data, the data structure type is currently `6`.
 
 Apart from the common fields described above, the following fields are defined:
 * `temp` - the most recent valid air temperature reading in °F
@@ -76,6 +76,61 @@ Notes:
 * After a soft restart, the time may be off by a few minutes until the device resynchronizes the time from a network time server. During this period where the time is uncertain, no additional data will be added to the PM averages. PM fields ending in `_last` will still update in real-time.
 * Current conditions data do not include calculated Air Quality Indices. The calculation
 of AQI varies from country to country and may require inputs that are not available to a single sensor. For AQI calculations using the latest AQI models, please visit [WeatherLink.com](https://www.weatherlink.com).
+
+### Sample JSON
+Below is a sample of the JSON response from `/v1/current_conditions`, after running the output through a JSON formatter:
+```
+{
+  "data":{
+    "did":"001D0A100021",
+    "name":"My AirLink",
+    "ts":1599150192,
+    "conditions":[
+      {
+        "lsid":123456,
+        "data_structure_type":6,
+        "temp":75.8,
+        "hum":54.3,
+        "dew_point":58.2,
+        "wet_bulb":62.7,
+        "heat_index":76.0,
+        "pm_1_last":1,
+        "pm_2p5_last":1,
+        "pm_10_last":1,
+        "pm_1":0.96,
+        "pm_2p5":1.21,
+        "pm_2p5_last_1_hour":2.30,
+        "pm_2p5_last_3_hours":2.29,
+        "pm_2p5_last_24_hours":4.81,
+        "pm_2p5_nowcast":2.30,
+        "pm_10":1.21,
+        "pm_10_last_1_hour":2.84,
+        "pm_10_last_3_hours":2.80,
+        "pm_10_last_24_hours":6.03,
+        "pm_10_nowcast":2.84,
+        "last_report_time":1599150192,
+        "pct_pm_data_last_1_hour":100,
+        "pct_pm_data_last_3_hours":100,
+        "pct_pm_data_nowcast":100,
+        "pct_pm_data_last_24_hours":80
+      }
+    ]
+  },
+  "error":null
+}
+```
+
+### Old versions
+Older versions of firmware may report a data structure type of `5`. The format is nearly identical to the type 6 document described above, except that some of the fields were not named consistently and have been renamed:
+
+| Type 6 Name           | Type 5 Name             |
+| --------------------- | ----------------------- |
+| `pm_10`               | `pm_10p0`               |
+| `pm_10_last_1_hour`   | `pm_10p0_last_1_hour`   |
+| `pm_10_last_3_hours`  | `pm_10p0_last_3_hours`  |
+| `pm_10_last_24_hours` | `pm_10p0_last_24_hours` |
+| `pm_10_nowcast`       | `pm_10p0_nowcast`       |
+
 
 ## HTTP Server Performance
 The embedded web server can process approximately three requests per second.
