@@ -174,3 +174,5 @@ device using its mDNS hostname, which is just the hostname with `.local`, e.g. `
 ### Via WeatherLink.com
 If you are the registered owner of the device on [WeatherLink.com](https://www.weatherlink.com), you can find the
 device's IP address on the "Health Data" page, listed as "AirLink IP Address".
+
+This may be found from the right "Wrench" tool icon, select registered AirLink device name, expand device name, and select "Health Data" from the top portion of the page.
