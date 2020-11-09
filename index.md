@@ -1,7 +1,9 @@
 # Introduction
-The AirLink provides an HTTP interface to retrieve current air quality data.
+The AirLink provides an HTTP interface that can be used by a computer on the same local area network to retrieve current air quality data.
 
 Current condition data is formatted as a JSON document containing air quality data from the particulate matter sensor as well as readings from the on-board temperature / humidity sensor.
+
+For information on how to remotely retrieve current and historic air quality data, see the [WeatherLink v2 API documentation](https://weatherlink.github.io/v2-api/).
 
 ## Format of HTTP requests
 
